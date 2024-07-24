@@ -73,7 +73,7 @@ class PageGuide extends ActiveRecord
         }
 
         foreach ($this->rules as $rule) {
-            if (!is_array($rule) || !isset($rule['step'], $rule['intro'])) {
+            if (!is_array($rule) || $rule['step'] === "" || $rule['intro'] === "") {
                 $this->addError('rules', Yii::t('pageGuide/model', 'Rules not valid'));
                 break;
             }

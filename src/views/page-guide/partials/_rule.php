@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 <div class="w-full max300 well-block px-4 py-4 mx-2 js-rule-container relative">
     <div class="w-full">
-        <label class="control-label"><?= Yii::t('pageGuide/view','step') ?></label>
+        <label class="control-label"><?= Yii::t('pageGuide/view','step').' *' ?></label>
         <input type="number" step="1" min="1" value="<?= $rule['step'] ?? $index + 1 ?>" name="PageGuide[rules][<?= $index ?>][step]" class="form-control js-step">
     </div>
     <div class="w-full">
@@ -16,7 +16,7 @@ use yii\helpers\Html;
         <input type="text" value="<?= $rule['element'] ?? '' ?>" name="PageGuide[rules][<?= $index ?>][element]" class="form-control js-element">
     </div>
     <div class="w-full">
-        <label class="control-label"><?= Yii::t('pageGuide/view','position') ?></label>
+        <label class="control-label"><?= Yii::t('pageGuide/view','position').' *' ?></label>
         <?= Html::dropDownList("PageGuide[rules][$index][position]",
             $rule['position'] ?? 'bottom', [
                 'right' => Yii::t('pageGuide/view','right'),
@@ -32,7 +32,7 @@ use yii\helpers\Html;
     </div>
 
     <div class="w-full">
-        <label class="control-label"><?= Yii::t('pageGuide/view','element_help') ?></label>
+        <label class="control-label"><?= Yii::t('pageGuide/view','element_help').' *' ?></label>
         <textarea name="PageGuide[rules][<?= $index ?>][intro]" cols="30" rows="10" class="form-control js-intro"><?= $rule['intro'] ?? '' ?></textarea>
     </div>
 
