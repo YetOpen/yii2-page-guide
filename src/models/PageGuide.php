@@ -13,7 +13,7 @@ use yii\helpers\Json;
  *
  * @property int $id
  * @property string|null $url
- * @property string|null $rules
+ * @property array|string|null $rules
  */
 class PageGuide extends ActiveRecord
 {
@@ -58,9 +58,14 @@ class PageGuide extends ActiveRecord
             }
         }
 
-        $this->rules = array_filter($this->rules, static function ($val) {
-            return !empty($val['element']);
-        });
+        $this->rules = array_map(function ($rule) {
+            if($rule['element'] === "")
+            {
+                $rule['element'] = null;
+            }
+            return $rule;
+        }, $this->rules);
+
         if (empty($this->rules)) {
             $this->rules = '{}';
             $this->addError('rules', Yii::t('pageGuide/model', 'Rules not set'));
@@ -68,7 +73,7 @@ class PageGuide extends ActiveRecord
         }
 
         foreach ($this->rules as $rule) {
-            if (!is_array($rule) || !isset($rule['step'], $rule['element'], $rule['intro'])) {
+            if (!is_array($rule) || $rule['step'] === "" || $rule['intro'] === "") {
                 $this->addError('rules', Yii::t('pageGuide/model', 'Rules not valid'));
                 break;
             }
